@@ -87,7 +87,9 @@ public class Module3_Tests {
             //e.printStackTrace();
         }
 
-        assertTrue("Task 2: The `application.properties` file does not contain `spring.data.rest.base-path = /api/v1`.", result.contains("spring.data.rest.base-path = /api/v1"));
+        System.out.println(result);
+
+        assertTrue("Task 2: The `application.properties` file does not contain `spring.data.rest.basePath = /api/v1`.", result.contains("spring.data.rest.basePath = /api/v1"));
     }
 
     @Test
