@@ -2,15 +2,19 @@ package com.pluralsight.blog.model;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.lang.reflect.Method;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Post {
@@ -18,18 +22,21 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    @Column(length=1000000)
+    @Column(length = 1000000)
     @Lob
     private String body;
     @Temporal(TemporalType.DATE)
     @CreationTimestamp
     private Date date;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Author author;
+
     public Post() {
         super();
     }
 
-    public Post(String title, String body){//, Author author) {
+    public Post(String title, String body) {
         this();
         this.title = title;
         this.body = body;
@@ -72,12 +79,20 @@ public class Post {
         this.date = date;
     }
 
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Post))
             return false;
-        Post otherPost = (Post)obj;
+        Post otherPost = (Post) obj;
         return this.title.equals(otherPost.getTitle()) &&
-               this.body.equals(otherPost.getBody());
+                this.body.equals(otherPost.getBody());
     }
 }
