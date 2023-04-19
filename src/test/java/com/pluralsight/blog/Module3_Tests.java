@@ -1,8 +1,6 @@
 package com.pluralsight.blog;
 
 import com.pluralsight.blog.config.RestConfig;
-import com.pluralsight.blog.data.AuthorRepository;
-import com.pluralsight.blog.data.DatabaseLoader;
 import com.pluralsight.blog.data.PostRepository;
 import com.pluralsight.blog.model.Author;
 import com.pluralsight.blog.model.Post;
@@ -11,29 +9,22 @@ import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.data.rest.core.event.ValidatingRepositoryEventListener;
-import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.TransactionSystemException;
-import org.springframework.validation.*;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.Version;
-import javax.validation.ConstraintViolationException;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -96,7 +87,7 @@ public class Module3_Tests {
             //e.printStackTrace();
         }
 
-        assertTrue("Task 2: The `application.properties` file does not contain `spring.data.rest.basePath = /api/v1`.", result.contains("spring.data.rest.basePath = /api/v1"));
+        assertTrue("Task 2: The `application.properties` file does not contain `spring.data.rest.base-path = /api/v1`.", result.contains("spring.data.rest.base-path = /api/v1"));
     }
 
     @Test
